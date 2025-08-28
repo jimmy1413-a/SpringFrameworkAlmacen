@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.almacen.entity.Categoria;
 import com.almacen.entity.Proveedor;
 import com.almacen.repository.ProveedorRepository;
 

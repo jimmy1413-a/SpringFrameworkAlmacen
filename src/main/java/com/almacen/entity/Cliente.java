@@ -5,37 +5,37 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
-@Entity 
+@Entity
 @Data
-@Table(name="cliente")
-
 public class Cliente {
 	
 	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
-	
 	@NotBlank(message = "El nombre es obligatorio")
-	@Size(max=10,min=2, message = "EL nombre debe de tener entre 2 y 10 caracteres")
+	@Size(max=50, min= 2, message = "El nombre debe tener entre 2 y 10 caractéres")
 	private String nombre;
 	
-	@Email(message = "EL formato de email no es correcto")
-	@NotBlank(message = "EL email esobligatorio")
-	private String Email;
+
+	@NotBlank(message = "La direccion es obligatoria")
+	@Size(max=25, min= 2, message = "El nombre debe tener entre 2 y 10 caractéres")
+	private String direccion;
 	
-	@NotBlank(message = "La dirección es obligatoria")
-	private String Direccion;
+	@NotBlank(message = "El teléfono es obligatorio.")
+	@Pattern(regexp = "\\d+", message = "El teléfono debe ser numérico.")
+	@Column(length = 20)
+	private String telefono;
 	
-	@NotBlank(message = "El telefono es obligatorio")
-	private String Telefono;
+	@Email(message = "El formato de email no es correcto")
+	@NotBlank(message = "El email es obligatorio")
+	@Column(unique = true)
+	private String correo;
+	
+	
 
 }

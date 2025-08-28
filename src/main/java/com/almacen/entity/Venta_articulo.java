@@ -1,5 +1,7 @@
 package com.almacen.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class Venta_articulo {
 	
 	@ManyToOne
 	@JoinColumn(name = "venta",referencedColumnName = "id")
+	@JsonBackReference
 	private Venta venta;
 	
 	

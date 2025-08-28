@@ -1,8 +1,13 @@
 package com.almacen.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -28,12 +34,17 @@ public class Compra {
 	private Integer id;
 	
 	
-	private Date fecha;
+	private LocalDateTime fecha;
 	
 	
 	@ManyToOne
 	@JoinColumn(name ="Proveedor",referencedColumnName = "id")
 	private Proveedor proveedor;
+	
+	
+	@OneToMany(mappedBy = "compra",cascade = CascadeType.ALL,orphanRemoval = true)
+	@JsonManagedReference
+	private List<Compra_articulo> detalles = new ArrayList<>();
 	
 	
 	@NotNull(message = "El precio de compra es obligatorio")
